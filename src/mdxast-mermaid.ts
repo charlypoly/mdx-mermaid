@@ -5,7 +5,7 @@
  * license file in the root directory of this source tree.
  */
 
-import { default as visit, EXIT } from 'unist-util-visit'
+import { visit, EXIT } from 'unist-util-visit'
 import { Literal, Parent, Node, Data } from 'unist'
 
 import { Config } from './config.model'
