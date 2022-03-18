@@ -5,7 +5,7 @@
  * license file in the root directory of this source tree.
  */
 
-import { visit, EXIT } from 'unist-util-visit'
+import { default as visit, EXIT } from 'unist-util-visit'
 import { Literal, Parent, Node, Data } from 'unist'
 
 import { Config } from './config.model'
@@ -21,12 +21,12 @@ type CodeMermaid = Literal<string> & {
  * @param config Config passed in from parser.
  * @returns Function to transform mdxast.
  */
-export default function plugin (config?: Config) {
+export default function plugin(config?: Config) {
   /**
    * Insert the component import into the document.
    * @param ast The document to insert into.
    */
-  function insertImport (ast: any) {
+  function insertImport(ast: any) {
     // See if there is already an import for the Mermaid component
     let importFound = false
     visit(ast, { type: 'import' }, (node: Literal<string>) => {
@@ -45,7 +45,7 @@ export default function plugin (config?: Config) {
     }
   }
 
-  return async function transformer (ast: any): Promise<Parent> {
+  return async function transformer(ast: any): Promise<Parent> {
     // Find all the mermaid diagram code blocks. i.e. ```mermaid
     const instances: [Literal, number, Parent<Node<Data> | Literal, Data>][] = []
     visit(ast, { type: 'code', lang: 'mermaid' }, (node: CodeMermaid, index, parent) => {
